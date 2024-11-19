@@ -40,5 +40,4 @@ import { SchemaUser, User } from './entities/user-schema'
   providers: [AppService],
   controllers: [AppController],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -8,7 +8,7 @@ export class User {
   role: RolesKey
 }
 
-const enum Roles {
+export const enum Roles {
   USUARIO = 'USUARIO',
   PACIENTE = 'PACIENTE',
   MEDICO = 'MEDICO',

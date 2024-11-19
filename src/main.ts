@@ -2,15 +2,18 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+
   app.connectMicroservice<MicroserviceOptions>({
-    options: {
-      host: 'localhost',
-      port: 6379,
-    },
     transport: Transport.REDIS,
+    options: {
+      host: process.env.REDIS_HOST ?? 'localhost',
+      port: parseInt(process.env.REDIS_PORT ?? '6379', 10),
+    },
   })
 
   const config = new DocumentBuilder()
@@ -27,6 +30,10 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
   await app.startAllMicroservices()
-  await app.listen(4003)
+  const port = Number(process.env.PORT || 4003)
+
+  await app.listen(port, () => {
+    console.log('Listening in port ', port)
+  })
 }
 bootstrap()
