@@ -12,7 +12,6 @@ export class Interceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     console.log(context.switchToRpc().getData())
 
-    return next
-      .handle()
+    return next.handle()
   }
 }
