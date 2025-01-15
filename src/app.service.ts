@@ -67,7 +67,7 @@ export class AppService {
   tokenVerifySuccess(token: string) {
     return {
       message: 'Autentication successfully',
-      statusCode: HttpStatus.ACCEPTED,
+      statusCode: HttpStatus.OK,
       success: true,
       token: `Token valited ${token}`,
     }
