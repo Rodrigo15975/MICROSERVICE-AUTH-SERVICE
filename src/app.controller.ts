@@ -19,13 +19,6 @@ export class AppController {
   signIn(@Payload() authData: AuthData) {
     return this.appService.signIn(authData)
   }
-
-  // @UseInterceptors(Interceptor)
-  // no era necesario el segudno guard
-  // @UseGuards(AuthVerifyTokenGuard)
-  //  estaba manejando mal los errores imprtante eso en microservicios
-  // pero aprendi decoradores middleware y a manejar errores en microservicios
-  // tambien interceptors, se ejecutan luego del guard
   @MessagePattern(VERIFY_TOKEN)
   @UseGuards(AuthUserGuard)
   verifyToken(@Payload() token: string) {
