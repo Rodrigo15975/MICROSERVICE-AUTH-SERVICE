@@ -9,8 +9,6 @@ import {
 } from './auth/common/auth-event-pattern'
 import { AuthUserGuard } from './auth/guards/auth-guards'
 import { AuthData } from './auth/types/type-auth'
-// import { Interceptor } from './common/token.interceptor'
-// import { AuthVerifyTokenGuard } from './auth/guards/auth-verify-token.guard'
 
 @Controller()
 @ApiTags('Auth-microservice')
