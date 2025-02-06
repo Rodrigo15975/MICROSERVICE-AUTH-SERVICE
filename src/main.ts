@@ -26,14 +26,27 @@ async function bootstrap() {
   SwaggerModule.setup('microservice-auth-service', app, document)
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
   await app.startAllMicroservices()
   const port = Number(process.env.PORT || 4003)
 
   await app.listen(port, () => {
-    console.log('Listening in port ', port)
+    if (process.env.NODE_ENV === 'production') {
+      return console.log(
+        'Microservice AUTH Listening in port ',
+        port,
+        ' mode: ',
+        process.env.NODE_ENV,
+      )
+    }
+    console.log(
+      'Microservice AUTH Listening in port ',
+      port,
+      ' mode: ',
+      process.env.NODE_ENV,
+    )
   })
 }
 bootstrap()
